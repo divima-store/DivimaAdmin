@@ -1,0 +1,29 @@
+{
+  "admain": [
+    "id",
+    "email" 
+],
+  "user": [
+    "id",
+    "email",
+    "location",
+    "ordered"
+],
+"products": [
+    "id",
+    "category",
+    "name",
+    "description",
+    "price",
+    "images",
+    "bought time's"
+],
+"orders": [
+    "id",
+    "location",
+    "phone-num",
+    "userId [foreign key]",
+    "productId [foreign key]",
+    "delivered"
+  ]
+}

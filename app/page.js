@@ -1,12 +1,21 @@
 import { AdminDashboardJsx } from "@/components/admin-dashboard";
+import { getOrders, getusers, getProducts } from "@/app/_lib/data-services";
+import { auth } from "@/app/_lib/auth";
+import { redirect } from "next/navigation";
 
-import { getOrders, getusers, getProducts } from "@/app/lib/data-services";
-export default async function page() {
+export default async function AdminDashboardPage() {
+  const session = await auth();
+
+  if (!session) {
+    redirect("/api/auth/signin");
+  }
+
   const orders = await getOrders();
   const users = await getusers();
   const products = await getProducts();
 
-  const totlOredrs = orders.totalCount;
+  const totalOrders = orders.totalCount;
+
   const dashboardData = {
     summaryCards: [
       {
@@ -14,8 +23,8 @@ export default async function page() {
         value: "$15,231.89",
         change: "+20.1% from last month",
       },
-      { title: "Orders", value: `${totlOredrs}`},
-      { title: " Customers", value: "+249", change: "+30% from last month" },
+      { title: "Orders", value: `${totalOrders}` },
+      { title: "Customers", value: "+249", change: "+30% from last month" },
     ],
     salesData: [
       { category: "Electronics", sales: 300 },
@@ -53,5 +62,6 @@ export default async function page() {
       },
     ],
   };
+
   return <AdminDashboardJsx dashboardData={dashboardData} />;
 }

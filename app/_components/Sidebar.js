@@ -9,8 +9,13 @@ import {
   UsersIcon,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { signOut } from "next-auth/react";
 
 export function Sidebar() {
+  const handelSginout = () => {
+    signOut({ callbackUrl: "/" });
+  };
   const pathname = usePathname();
 
   const isActive = (route) => {
@@ -70,6 +75,8 @@ export function Sidebar() {
               <UsersIcon className="h-4 w-4" />
               Customers
             </Link>
+            <br></br>
+            <Button onClick={handelSginout}>sgin out</Button>
           </nav>
         </div>
       </div>

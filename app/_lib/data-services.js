@@ -50,7 +50,6 @@ export const getOrders = async function (
     throw new Error(`Failed to fetch orders: ${error.message}`);
   }
 
-  // Format the data to include product details directly in the order object
   const formattedOrders = data.map((order) => ({
     ...order,
     productName: order.product?.name,
@@ -58,7 +57,6 @@ export const getOrders = async function (
     productImageUrl: order.product?.imageUrl,
   }));
 
-  console.log("Formatted Orders:", formattedOrders); // For debugging
 
   return {
     orders: formattedOrders,
@@ -66,4 +64,14 @@ export const getOrders = async function (
     currentPage: page,
     totalPages: Math.ceil(count / pageSize),
   };
+};
+
+export const getAdmins = async function () {
+  const { data, error } = await supabase.from("admins").select("*");
+  console.log(data)
+  if (error) {
+    console.error("Error fetching admins:", error);
+    return [];
+  }
+  return data;
 };

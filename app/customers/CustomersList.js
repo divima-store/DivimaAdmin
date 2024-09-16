@@ -1,8 +1,8 @@
-import { getusers } from "../lib/data-services";
+import { getusers } from "../_lib/data-services";
 import CustomerCard from "./CustomerCard ";
 
 export default async function CustomersList() {
-  const customers = await getusers()
+  const customers = await getusers();
   return (
     <div className="container mx-auto p-4">
       <div className="mb-4">

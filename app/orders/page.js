@@ -1,4 +1,4 @@
-import { getOrders } from "../lib/data-services";
+import { getOrders } from "../_lib/data-services";
 import OrderCard from "./OrderCard";
 
 export default async function OrdersPage() {
@@ -10,7 +10,7 @@ export default async function OrdersPage() {
     const result = await getOrders();
     const filteredOrders = result.orders.filter((order) => !order.isCanceled);
     orders = filteredOrders;
-    totalCount = filteredOrders.length; 
+    totalCount = filteredOrders.length;
   } catch (err) {
     error = err.message;
     console.error("Error fetching orders:", err);

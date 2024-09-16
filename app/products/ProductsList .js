@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { getProducts } from "../lib/data-services";
-import ProductCard from "./ProductCard";
 import { AddProductFormJsx } from "@/components/add-product-form";
+import { useEffect, useState } from "react";
+import { getProducts } from "../_lib/data-services";
 import AddButton from "./Addbutton";
+import ProductCard from "./ProductCard";
 
 export default function ProductsList() {
   const [showForm, setShowForm] = useState(false);

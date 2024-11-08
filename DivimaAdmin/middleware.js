@@ -25,8 +25,8 @@ export async function middleware(req) {
   }
 
   if (!token) {
-    console.log("No token, redirecting to /");
-    return NextResponse.redirect(new URL("/", req.url));
+    console.log("No token, redirecting to /api/auth/signin");
+    return NextResponse.redirect(new URL("/api/auth/signin", req.url));
   }
 
   console.log("User authenticated, allowing access");

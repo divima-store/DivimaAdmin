@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { getusers } from "../_lib/data-services";
-import CustomerCard from "./CustomerCard ";
+import CustomerCard from "./CustomerCard";
 
 export default function CustomersList() {
   const [searchTerm, setSearchTerm] = useState("");

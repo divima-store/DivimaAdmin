@@ -23,7 +23,7 @@ export function Sidebar() {
   };
 
   return (
-    <div className="hidden border-r bg-white lg:block dark:bg-gray-800/40">
+    <div className="hidden border-r bg-white lg:block dark:bg-gray-800/40 fixed top-0 left-0 h-full w-[280px]">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-[60px] items-center border-b px-6">
           <Link className="flex items-center gap-2 font-semibold" href="#">
@@ -76,7 +76,7 @@ export function Sidebar() {
               Customers
             </Link>
             <br></br>
-            <Button onClick={handelSginout}>sgin out</Button>
+            <Button onClick={handelSginout}>Sign out</Button>
           </nav>
         </div>
       </div>

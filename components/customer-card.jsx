@@ -1,14 +1,20 @@
-"use client";
+'use client'
 
-import React from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { MapPin } from "lucide-react";
-import { EnvelopeClosedIcon, PersonIcon } from "@radix-ui/react-icons";
+import React from "react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { MapPin } from "lucide-react"
+import { EnvelopeClosedIcon, PersonIcon } from "@radix-ui/react-icons"
 
-export function CustomerCardJsx({ customer }) {
+export function CustomerCardJsx({ customer = {
+  id: "C12345",
+  name: "Jane Doe",
+  email: "jane.doe@example.com",
+  address: "123 Main St, Anytown, AN 12345"
+} }) {
   return (
-    <Card className="w-full max-w-sm hover:shadow-lg transition-shadow duration-300">
+    (<Card
+      className="w-full max-w-sm hover:shadow-lg transition-shadow duration-300">
       <CardHeader className="pb-2">
         <div className="flex justify-between items-start">
           <div>
@@ -31,6 +37,6 @@ export function CustomerCardJsx({ customer }) {
           <span className="text-muted-foreground">{customer.address}</span>
         </div>
       </CardContent>
-    </Card>
+    </Card>)
   );
 }

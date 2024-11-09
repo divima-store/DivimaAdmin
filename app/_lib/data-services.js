@@ -1,12 +1,13 @@
 import { supabase } from "./supabase";
 
 export const getProducts = async function () {
-  const { data, error } = await supabase.from("products").select("*");
-  if (error) {
-    console.error("Error fetching products:", error.message);
-    return [];
-  }
-  return data;
+
+    const { data, error } = await supabase.from("products").select("*").eq("isActive", true);
+    if (error) {
+        console.error("Error fetching products:", error.message);
+        return [];
+    }
+    return data;
 };
 export const getusers = async function () {
   const { data, error } = await supabase.from("users").select("*");

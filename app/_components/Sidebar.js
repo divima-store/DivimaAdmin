@@ -1,6 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import LogoutConfirmation from "@/components/LogoutConfirmation";
 import {
   BarChartIcon,
   BoxIcon,
@@ -9,13 +12,18 @@ import {
   UsersIcon,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { signOut } from "next-auth/react";
 
-export function Sidebar() {
-  const handelSginout = () => {
-    signOut({ callbackUrl: "/" });
+export default function Sidebar() {
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+
+  const handleLogoutClick = () => {
+    setShowLogoutConfirm(true);
   };
+
+  const handleCloseLogoutConfirm = () => {
+    setShowLogoutConfirm(false);
+  };
+
   const pathname = usePathname();
 
   const isActive = (route) => {
@@ -23,7 +31,7 @@ export function Sidebar() {
   };
 
   return (
-    <div className="hidden border-r bg-white lg:block dark:bg-gray-800/40 fixed top-0 left-0 h-full w-[280px]">
+    <div className="hidden border-r bg-white lg:block dark:bg-gray-800/40 fixed top-0 left-0 h-full w-[280px] z-10">
       <div className="flex h-full max-h-screen flex-col gap-2">
         <div className="flex h-[60px] items-center border-b px-6">
           <Link className="flex items-center gap-2 font-semibold" href="#">
@@ -76,10 +84,15 @@ export function Sidebar() {
               Customers
             </Link>
             <br></br>
-            <Button onClick={handelSginout}>Sign out</Button>
+            <Button onClick={handleLogoutClick}>Logout</Button>
           </nav>
         </div>
       </div>
+
+      {/* Logout Confirmation Modal */}
+      {showLogoutConfirm && (
+        <LogoutConfirmation onClose={handleCloseLogoutConfirm} />
+      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
-import { Sidebar } from "./_components/Sidebar";
+import Sidebar from "./_components/Sidebar";
 import { Toaster } from "react-hot-toast";
 
 const geistSans = localFont({

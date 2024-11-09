@@ -1,6 +1,7 @@
 import { supabase } from "./supabase";
 
 export const getProducts = async function () {
+
     const { data, error } = await supabase.from("products").select("*").eq("isActive", true);
     if (error) {
         console.error("Error fetching products:", error.message);
@@ -16,11 +17,7 @@ export const getusers = async function () {
   }
   return data;
 };
-export const getOrders = async function (
-  status = "all",
-  page = 1,
-  pageSize = 10
-) {
+export const getOrders = async function (page = 1, pageSize = 10) {
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize - 1;
 
@@ -36,10 +33,6 @@ export const getOrders = async function (
     `,
     { count: "exact" }
   );
-
-  if (status !== "all") {
-    query = query.eq("status", status);
-  }
 
   const { data, error, count } = await query
     .range(startIndex, endIndex)
@@ -57,12 +50,12 @@ export const getOrders = async function (
     productImageUrl: order.product?.imageUrl,
   }));
 
-
   return {
     orders: formattedOrders,
     totalCount: count,
     currentPage: page,
     totalPages: Math.ceil(count / pageSize),
+    timestamp: Date.now()
   };
 };
 
@@ -75,3 +68,25 @@ export const getAdmins = async function () {
   }
   return data;
 };
+
+export async function updateOrderStatus(orderId, newStatus) {
+  const { data, error } = await supabase
+    .from('orders')
+    .update({
+      orderStatus: newStatus,
+      dilevered: newStatus === 'done'
+    })
+    .eq('id', orderId)
+    .select()
+    .single();
+
+  if (error) {
+    console.error('Error updating order status:', error);
+    throw new Error('Failed to update order status');
+  }
+
+  return {
+    success: true,
+    data
+  };
+}
